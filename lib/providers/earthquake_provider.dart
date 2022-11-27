@@ -6,9 +6,9 @@ import 'package:http/http.dart';
 
 class EarthquakeProvider extends ChangeNotifier{
   EarthquakeResponse? earthquakeResponse;
-  String startDate = '2022-11-20';
-  String endDate = '2022-11-23';
-  double magnitude = 5.0;
+  String? startDate;
+  String? endDate;
+  double? magnitude;
 
   bool get hasDataLoaded => earthquakeResponse != null ;
 
@@ -25,7 +25,6 @@ class EarthquakeProvider extends ChangeNotifier{
       final map = json.decode(response.body);
       if(response.statusCode == 200){
         earthquakeResponse = EarthquakeResponse.fromJson(map);
-        print(earthquakeResponse!.metadata!.title!);
         notifyListeners();
       }else{
         print(response.statusCode.toString());
