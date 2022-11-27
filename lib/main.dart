@@ -1,7 +1,15 @@
+
+
+import 'package:earthquake/pages/home_page.dart';
+import 'package:earthquake/providers/earthquake_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context) => EarthquakeProvider()),
+  ],
+  child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -10,8 +18,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-
+    return MaterialApp(
+      initialRoute: HomePage.routeName,
+      routes: {
+        HomePage.routeName : (context) => HomePage(),
+      },
     );
   }
 }
